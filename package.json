@@ -17,7 +17,34 @@
         "command": "shortcut-vsc.helloWorld",
         "title": "Hello World"
       }
+    ],
+    "keybindings": [
+      {
+        "command": "cursorLeft",
+        "key": "ctrl+h",
+        "mac": "cmd+h",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "cursorDown",
+        "key": "ctrl+j",
+        "mac": "cmd+j",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "cursorUp",
+        "key": "ctrl+k",
+        "mac": "cmd+k",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "cursorRight",
+        "key": "ctrl+l",
+        "mac": "cmd+l",
+        "when": "editorTextFocus"
+      }
     ]
+    
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
