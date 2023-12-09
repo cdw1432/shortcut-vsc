@@ -1,26 +1,25 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { ModeController } from './modeController';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+let modeController:ModeController;
 export function activate(context: vscode.ExtensionContext) {
+	
+	modeController = new ModeController();
+	
+	vscode.workspace.getConfiguration('editor').update('cursorStyle', 'line', vscode.ConfigurationTarget.Global);
+	
+	vscode.commands.registerCommand('ext.cmd_mode', () => modeController.keyController("ctrl+shift+alt+a"));
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "shortcut-vsc" is now active!');
+	vscode.commands.registerCommand('ext.cmd_mode.h', () => modeController.keyController("h"));
+	vscode.commands.registerCommand('ext.cmd_mode.j', () => modeController.keyController("j"));
+	vscode.commands.registerCommand('ext.cmd_mode.k', () => modeController.keyController("k"));
+	vscode.commands.registerCommand('ext.cmd_mode.l', () => modeController.keyController("l"));
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('shortcut-vsc.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from shortcut-vsc!');
-	});
+	vscode.commands.registerCommand('ext.cmd_mode.q', () => modeController.keyController("q"));
+	vscode.commands.registerCommand('ext.cmd_mode.e', () => modeController.keyController("e"));
 
-	context.subscriptions.push(disposable);
+	vscode.commands.registerCommand('ext.cmd_mode.f', () => modeController.keyController("f"));
+
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}

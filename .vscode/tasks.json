@@ -15,6 +15,18 @@
 				"kind": "build",
 				"isDefault": true
 			}
-		}
+		},
+		// {
+		// 	"label": "Print Workspace Folder",
+		// 	"type": "shell",
+		// 	"command": "echo",
+		// 	"args": [
+		// 	  "Workspace Folder: ${workspaceFolder}"
+		// 	],
+		// 	"group": {
+		// 	  "kind": "build",
+		// 	  "isDefault": true
+		// 	}
+		//   }
 	]
 }
