@@ -16,9 +16,6 @@ export default class cmdMode {
     password(key: string): boolean {
         return key === 'ctrl+shift+alt+a';
     }
-    on() {
-        vscode.workspace.getConfiguration('editor').update('cursorStyle', 'block', vscode.ConfigurationTarget.Global);
-    }
     cmdController(cmd: string): void {
         if(this.active) {
             switch(cmd) {
@@ -37,7 +34,12 @@ export default class cmdMode {
             }
         }
     }
-    off() {
-        vscode.workspace.getConfiguration('editor').update('cursorStyle', 'line', vscode.ConfigurationTarget.Global);
+    cursorController(s: boolean) {
+        if(s) {
+            vscode.workspace.getConfiguration('editor').update('cursorStyle', 'block', vscode.ConfigurationTarget.Global);
+        } else {
+            vscode.workspace.getConfiguration('editor').update('cursorStyle', 'line', vscode.ConfigurationTarget.Global);
+
+        }
     }
 }

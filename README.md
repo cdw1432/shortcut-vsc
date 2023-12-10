@@ -9,3 +9,8 @@ Down: `j`\
 Up: `k`\
 Right: `l`\
 (yes, just like Vim)
+
+Prev Word: `q`\
+Next Word: `e`
+
+Finish: `f`
