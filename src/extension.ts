@@ -5,11 +5,10 @@ let modeController:ModeController;
 export function activate(context: vscode.ExtensionContext) {
 	
 	modeController = new ModeController();
-	
 	//default cursor style. off
-	vscode.workspace.getConfiguration('editor').update('cursorStyle', 'line', vscode.ConfigurationTarget.Global);
+	vscode.workspace.getConfiguration('editor').update('cursorStyle', 'line', vscode.ConfigurationTarget.Workspace);
 	
-	vscode.commands.registerCommand('ext.cmd_mode', () => modeController.keyController("ctrl+shift+alt+a"));
+	vscode.commands.registerCommand('ext.cmd_mode', () => modeController.keyController("ctrl+shift+j"));
 
 	vscode.commands.registerCommand('ext.cmd_mode.h', () => modeController.keyController("h"));
 	vscode.commands.registerCommand('ext.cmd_mode.j', () => modeController.keyController("j"));
@@ -22,4 +21,10 @@ export function activate(context: vscode.ExtensionContext) {
 	vscode.commands.registerCommand('ext.cmd_mode.f', () => modeController.keyController("f"));
 
 }
-export function deactivate() {}
+export function deactivate() {
+	try {
+		console.log('successfully deactivated.');
+	} catch(error) {
+		console.log(error);
+	}
+}

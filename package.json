@@ -10,7 +10,7 @@
     "Other"
   ],
   "activationEvents": [
-    "*"
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "devDependencies": {
@@ -36,16 +36,12 @@
   "contributes": {
     "commands": [
       {
-        "command": "shortcut-vsc.helloWorld",
-        "title": "Hello World"
-      },
-      {
         "command": "shortcut-vsc.cursorMode",
         "title": "Cursor Mode"
       }
     ],
     "keybindings": [
-      {"key":"shift+ctrl+alt+a","command":"ext.cmd_mode","when":"editorTextFocus"},
+      {"key":"ctrl+shift+j","command":"ext.cmd_mode","when":"editorTextFocus"},
       {"key":"h","command":"ext.cmd_mode.h","when":"editorTextFocus"},
       {"key":"j","command":"ext.cmd_mode.j","when":"editorTextFocus"},
       {"key":"k","command":"ext.cmd_mode.k","when":"editorTextFocus"},

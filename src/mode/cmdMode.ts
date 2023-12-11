@@ -1,11 +1,42 @@
 /* Command Mode */
 import * as vscode from 'vscode';
+class Cursor {
+    static currentPosition(): vscode.Position {
+        return vscode.window.activeTextEditor?.selection.active || new vscode.Position(0, 0);
+    }
+    toWordStart(): void {
+        const currentPosition = Cursor.currentPosition();
+        const newPosition = vscode.commands.executeCommand<vscode.Position>(
+            "cursorWordLeft",
+            { to: "wrappedLineFirstNonWhitespaceCharacter", by: "word" },
+            currentPosition
+        );
+
+        if (newPosition instanceof vscode.Position) {
+            vscode.window.activeTextEditor.selection = new vscode.Selection(newPosition, newPosition);
+        }
+    }
+
+    toWordEnd(): void {
+        const currentPosition = Cursor.currentPosition();
+        const newPosition = vscode.commands.executeCommand<vscode.Position>(
+            "cursorWordRight",
+            { to: "wrappedLineLastNonWhitespaceCharacter", by: "word" },
+            currentPosition
+        );
+
+        if (newPosition instanceof vscode.Position) {
+            vscode.window.activeTextEditor.selection = new vscode.Selection(newPosition, newPosition);
+        }
+    }
+}
 
 export default class cmdMode {
     private active: boolean;
-
+    private cursor: Cursor;
     constructor() {
         this.active = false;
+        this.cursor = new Cursor();
     }
     get isActive(): boolean {
         return this.active;
@@ -14,7 +45,7 @@ export default class cmdMode {
         this.active = v;
     }
     password(key: string): boolean {
-        return key === 'ctrl+shift+alt+a';
+        return key === 'ctrl+shift+j';
     }
     cmdController(cmd: string): void {
         if(this.active) {
@@ -30,15 +61,21 @@ export default class cmdMode {
                     break;
                 case 'l':
                     vscode.commands.executeCommand("cursorRight");
-                    break;        
+                    break;
+                case 'q':
+                    this.cursor.toWordStart();
+                    break;       
+                case 'e':
+                    this.cursor.toWordEnd();
+                    break;
             }
         }
     }
     cursorController(s: boolean) {
         if(s) {
-            vscode.workspace.getConfiguration('editor').update('cursorStyle', 'block', vscode.ConfigurationTarget.Global);
+            vscode.workspace.getConfiguration('editor').update('cursorStyle', 'block', vscode.ConfigurationTarget.Workspace);
         } else {
-            vscode.workspace.getConfiguration('editor').update('cursorStyle', 'line', vscode.ConfigurationTarget.Global);
+            vscode.workspace.getConfiguration('editor').update('cursorStyle', 'line', vscode.ConfigurationTarget.Workspace);
 
         }
     }
